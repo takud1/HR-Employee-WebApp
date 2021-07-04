@@ -1,0 +1,169 @@
+{% extends 'template.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'employee_details_style.css' %}">
+
+<div class="heading">
+    <h2><b>Employees</b></h2>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table class="employees">
+    <tr>
+        <th>Name</th>
+        <th>Employee ID</th>
+        <th>Job Position</th>
+        <th>Document Preview</th>
+        <th>Remove Employee</th>
+    </tr>
+    <tr>
+        <td>Jesse</td>
+        <td>574034</td>
+        <td>Technical</td>
+        <td>
+            <a href="document_preview">
+                View
+            </a>
+        </td>
+        <td>
+        <a href="#" onclick="return confirm('Are you sure');">
+            Remove
+        </a>
+    </td>
+    </tr>
+    <tr>
+        <td>Saul</td>
+        <td>711344</td>
+        <td>Sales</td>
+        <td>
+        <a href="document_preview">
+            View
+        </a>
+    </td>
+    <td>
+        <a href="#" onclick="return confirm('Are you sure');">
+            Remove
+        </a>
+    </td>
+    </tr>
+    <tr>
+        <td>Michael</td>
+        <td>117275</td>
+        <td>Logistics</td>
+        <td>
+        <a href="document_preview">
+            View
+        </a>
+    </td>
+    <td>
+        <a href="#" onclick="return confirm('Are you sure');">
+            Remove
+        </a>
+    </td>
+    </tr>
+    <tr>
+        <td>Trevor</td>
+        <td>264342</td>
+        <td>Marketing</td>
+        <td>
+        <a href="document_preview">
+            View
+        </a>
+    </td>
+    <td>
+        <a href="#" onclick="return confirm('Are you sure');">
+            Remove
+        </a>
+    </td>
+    </tr>
+    <tr>
+        <td>Franklin</td>
+        <td>739439</td>
+        <td>Sales</td>
+        <td>
+            <a href="document_preview">
+                View
+            </a>
+        </td>
+        <td>
+        <a href="#" onclick="return confirm('Are you sure');">
+            Remove
+        </a>
+    </td>
+        </tr>
+    <tr>
+        <td>Lester</td>
+        <td>568513</td>
+        <td>Technical</td>
+        <td>
+            <a href="document_preview">
+                View
+            </a>
+        </td>
+        <td>
+            <a href="#" onclick="return confirm('Are you sure');">
+                Remove
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>Taliana</td>
+        <td>138093</td>
+        <td>Logistics</td>
+        <td>
+            <a href="document_preview">
+                View
+            </a>
+        </td>
+        <td>
+            <a href="#" onclick="return confirm('Are you sure');">
+                Remove
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>Dave</td>
+        <td>207092</td>
+        <td>Marketing</td>
+        <td>
+            <a href="document_preview">
+                View
+            </a>
+        </td>
+        <td>
+            <a href="#" onclick="return confirm('Are you sure');"> 
+                Remove
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>Steve</td>
+        <td>708666</td>
+        <td>Sales</td>
+        <td>
+            <a href="document_preview">
+                View
+            </a>
+        </td>
+        <td>
+            <a href="#" onclick="return confirm('Are you sure');">
+                Remove
+            </a>
+        </td>
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<div class>
+    <button class="add_employee" style="float: right;">Add Employee</button>
+</div>
+
+{% endblock %}

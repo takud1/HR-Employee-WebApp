@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{%static 'login_design.css' %}">
+</head>
+
+<body>
+    <div class="center">
+        <h1>Welcome to Phemesoft!</h1>
+        <form method="POST">
+            {% for message in messages %}
+            <h3>{{message}}</h3>
+            {% endfor %}
+            {% csrf_token %}
+            <div class="txt_field">
+                <input type="text" required name="username">
+                <span></span>
+                <label>UserID</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" required name="password">
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div class="pass">Forgot Password?</div>
+            <input type="submit" value="Login">
+            <br>
+            <br>
+            <br>
+        </form>
+    </div>
+
+</body>
+
+</html>
