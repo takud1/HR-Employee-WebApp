@@ -132,4 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'hr_pages.UserData'
 
-LOGIN_REDIRECT_URL = 'thanks'
+LOGIN_URL = '/login/'

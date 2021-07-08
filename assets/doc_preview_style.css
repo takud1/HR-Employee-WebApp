@@ -48,7 +48,7 @@
 	text-align: center;
 	line-height: 1em;
 	font-family: sans-serif;
-    cursor: pointer;
+	cursor: pointer;
 }
 .e3_20 img{
 	border: none;
@@ -70,7 +70,7 @@
 	text-align: center;
 	line-height: 1em;
 	font-family: sans-serif;
-    cursor: pointer;
+	cursor: pointer;
 }
 .e4_16 img{
 	border: none;
@@ -93,7 +93,7 @@
 	text-align: center;
 	line-height: 1em;
 	font-family: sans-serif;
-    cursor: pointer;
+	cursor: pointer;
 }
 .e1_12 img{
 	border: none;
@@ -136,30 +136,37 @@ h2{
     text-align: center;
 }
 
-input[type=number]{
-    width: 40%;
-    padding: 12px 20px;
-    margin: 8px 0 0 16px;
-    display: inline-block;
-    border: 1px solid black;
-    border-radius: 0px;
-    box-sizing: border-box;
-  }
-  form{
-      margin-top: 0.15em;
-  }
-
-  form label{
+h4{
+    font-family: sans-serif;
+    margin-left: 22.5em;
+}
+iframe{
     margin-left: 1em;
+    float: left;
 }
 
-input[type=submit]{
-    background-color: #890FE8;
-    border: none;
-    border-radius: 1e+08px;
-    color: white;
-    font-weight: bold;
-    padding: 16px 32px;
-    margin: 8px 0 0 16px;
-    cursor: pointer;
+.buttons{
+    float: right;
+}
+
+.accept{
+    background-image: url("https://lh3.googleusercontent.com/proxy/XH4MjI-tfGyrsi7U6AbsK9WoSMrLzkIKbI_Xexk8R4T_3JPZPfZ1jJkPORsYscpoMWOb015LVWTHOgR2AfsjSbnfrfOm8m8");
+    background-size: 115%;
+    background-position: center;
+    padding: 20px;
+	border: 1px solid #D3D3D3;
+	border-radius: 50%;
+	cursor: pointer;
+	margin-right: 50px;
+}
+
+.reject{
+    background-image: url("https://cdn2.vectorstock.com/i/1000x1000/86/86/red-cross-icon-isolated-sign-wrong-or-error-vector-31048686.jpg");
+    background-size: 200%;
+    background-position: 50% 45%;
+    padding: 20px;
+	border: 1px solid #D3D3D3;
+    border-radius: 50%;
+	cursor: pointer;
+	margin-right: 64px;
 }

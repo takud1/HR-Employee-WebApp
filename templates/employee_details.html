@@ -23,85 +23,11 @@
         <th>Document Preview</th>
         <th>Remove Employee</th>
     </tr>
+    {% for i in entry %}
     <tr>
-        <td>Jesse</td>
-        <td>574034</td>
-        <td>Technical</td>
-        <td>
-            <a href="document_preview">
-                View
-            </a>
-        </td>
-        <td>
-        <a href="#" onclick="return confirm('Are you sure');">
-            Remove
-        </a>
-    </td>
-    </tr>
-    <tr>
-        <td>Saul</td>
-        <td>711344</td>
-        <td>Sales</td>
-        <td>
-        <a href="document_preview">
-            View
-        </a>
-    </td>
-    <td>
-        <a href="#" onclick="return confirm('Are you sure');">
-            Remove
-        </a>
-    </td>
-    </tr>
-    <tr>
-        <td>Michael</td>
-        <td>117275</td>
-        <td>Logistics</td>
-        <td>
-        <a href="document_preview">
-            View
-        </a>
-    </td>
-    <td>
-        <a href="#" onclick="return confirm('Are you sure');">
-            Remove
-        </a>
-    </td>
-    </tr>
-    <tr>
-        <td>Trevor</td>
-        <td>264342</td>
-        <td>Marketing</td>
-        <td>
-        <a href="document_preview">
-            View
-        </a>
-    </td>
-    <td>
-        <a href="#" onclick="return confirm('Are you sure');">
-            Remove
-        </a>
-    </td>
-    </tr>
-    <tr>
-        <td>Franklin</td>
-        <td>739439</td>
-        <td>Sales</td>
-        <td>
-            <a href="document_preview">
-                View
-            </a>
-        </td>
-        <td>
-        <a href="#" onclick="return confirm('Are you sure');">
-            Remove
-        </a>
-    </td>
-        </tr>
-    <tr>
-        <td>Lester</td>
-        <td>568513</td>
-        <td>Technical</td>
+        <td>{{i.first_name}}</td>
+        <td>{{i.emp_id}}</td>
+        <td>{{i.group_name}}</td>
         <td>
             <a href="document_preview">
                 View
@@ -109,55 +35,11 @@
         </td>
         <td>
             <a href="#" onclick="return confirm('Are you sure');">
-                Remove
+            Remove
             </a>
         </td>
     </tr>
-    <tr>
-        <td>Taliana</td>
-        <td>138093</td>
-        <td>Logistics</td>
-        <td>
-            <a href="document_preview">
-                View
-            </a>
-        </td>
-        <td>
-            <a href="#" onclick="return confirm('Are you sure');">
-                Remove
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td>Dave</td>
-        <td>207092</td>
-        <td>Marketing</td>
-        <td>
-            <a href="document_preview">
-                View
-            </a>
-        </td>
-        <td>
-            <a href="#" onclick="return confirm('Are you sure');"> 
-                Remove
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td>Steve</td>
-        <td>708666</td>
-        <td>Sales</td>
-        <td>
-            <a href="document_preview">
-                View
-            </a>
-        </td>
-        <td>
-            <a href="#" onclick="return confirm('Are you sure');">
-                Remove
-            </a>
-        </td>
-    </tr>
+    {% endfor %}
 </table>
 <br>
 <br>
