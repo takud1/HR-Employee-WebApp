@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, request
+from django.http import HttpResponse
 from django.contrib import messages
 from hr_pages.models import UserData, Docs
-from django.contrib.auth.models import Group, auth
+from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import user_passes_test
+from django.conf import settings
+from django.core.mail import send_mail
 
-# Create your views here.
+#Group Verification
 def group_required(*group_names):
   
    def in_groups(u):
@@ -15,13 +17,11 @@ def group_required(*group_names):
        return False
    return user_passes_test(in_groups)
 
+#Employee Registration View
 @group_required('HR')
 def register(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
 
-        return render(request, 'AddEmployee.html')
-
-    else:
         username = request.POST['email']
         first_name = request.POST['firstname'].capitalize()
         last_name = request.POST['lastname'].capitalize()
@@ -30,7 +30,7 @@ def register(request):
         mobileno = request.POST['mobileno']
         emp_id = request.POST['empid']
         group_name = request.POST['job_pos']
-        password = "qwerty"
+        password = UserData.objects.make_random_password()
 
         if UserData.objects.filter(username=username).exists():
             messages.error(request, 'Username Already Taken')
@@ -42,6 +42,7 @@ def register(request):
             return redirect("register")
 
         else:
+            #Creating User
             user = UserData.objects.create_user(
 
                 username = username,
@@ -61,19 +62,40 @@ def register(request):
 
             user.save()
 
-            """docs = Docs.objects.create(
-                aadhar= request.POST.get('aadhar', False),
-                pan = request.POST.get('pan', False),
+            docs = Docs.objects.create(
+                user = user,
+                aadhar_card = request.POST.get('aadhar', False),
+                pan_card = request.POST.get('pan', False),
                 passport = request.POST.get('passport', False),
-                d_license = request.POST.get('license', False),
+                driving_license = request.POST.get('license', False),
                 )
 
-            docs.save()"""
+            docs.save()
+            
+            #Send password to user
+            send_mail(
+                subject="Welcome To Phemesoft", 
+                message="Hi {},\n\nThe password to your account is {}".format(first_name, password),
+                from_email=settings.EMAIL_HOST_USER, 
+                recipient_list=[email],
+                )
+            
             return HttpResponse("<h3>User {} has been created<h3>".format(first_name))
+        
 
+    else:
+        return render(request, 'AddEmployee.html')
+
+#Employee Details View
 def view_emp(request):
     entry = UserData.objects.all().filter(is_superuser=0)
     return render(request, "EmployeeDetails.html", {'entry':entry})
 
+#Document Preview View
 def doc_preview(request):
     return render(request, "DocPreview.html")
+
+def delete_emp(request):
+    id = request.GET['delete_button']
+    print(id)
+    return redirect("hr/emp_info")

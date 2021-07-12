@@ -13,7 +13,7 @@ class UserData(AbstractUser):
     
 class Docs(models.Model):
     user = OneToOneField(UserData, primary_key=True, on_delete=models.CASCADE)
-    aadhar = BooleanField(default=False)
-    pan = BooleanField(default=False)
+    aadhar_card = BooleanField(default=False)
+    pan_card = BooleanField(default=False)
     passport = BooleanField(default=False)
-    d_license = BooleanField(default=False)
+    driving_license = BooleanField(default=False)

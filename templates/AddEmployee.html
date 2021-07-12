@@ -16,87 +16,88 @@
 
 </head>
   
-  <div class="col-md-9">
-    
-    <h1 class="display-4 ps-5">Add New Employee</h1>
+<div class="col-md-9">
+  
+  <h1 class="display-4 ps-5">Add New Employee</h1>
 
-    <br>
-    <br>
-    <div class="container">
-      <form class="row g-3 ">
-        <div class="col-md-4 offset-md-1" id="fname" >
-          <label for="validationDefault01" class="form-label">First name</label>
-          <input type="text" class="form-control" id="validationDefault01" name="firstname" required>
+  <br>
+  <br>
+  <div class="container">
+    <form class="row g-3" method="POST">
+      {% csrf_token %}
+      <div class="col-md-4 offset-md-1" id="fname" >
+        <label for="validationDefault01" class="form-label">First name</label>
+        <input type="text" class="form-control" id="validationDefault01" name="firstname" required>
+      </div>
+      <div  class="col-md-4 offset-md-1">
+        <label for="validationDefault02" class="form-label">Last name</label>
+        <input type="text" class="form-control" id="validationDefault02" name="lastname" required>
+      </div>
+      <div class="col-md-4 offset-md-1">
+        <label for="validationDefault04" class="form-label">Job Position</label>
+        <select class="form-select" id="validationDefault04" name="job_pos" required>
+          <option selected disabled value="">------ Select an Option ------</option>
+          <option>Sales</option>
+          <option>IT</option>
+          <option>HR</option>
+        </select>
+      </div>
+      <div class="col-md-4 offset-md-1">
+        <label for="validationDefault03" class="form-label">Employee ID</label>
+        <input type="number" min="111111" max="999999" class="form-control" id="validationDefault03" name="empid" required>
+      </div>
+      <div class="col-md-4 offset-md-1">
+        <label for="validationDefault04" class="form-label">Date of Joining</label>
+        <input type="date" class="form-control" id="validationDefault04" name="date" required>
+      </div>
+      <div class="col-md-4 offset-md-1">
+        <label for="validationDefault05" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="validationDefault05" placeholder="name@example.com" name="email" required>
+      </div>
+      <div class="col-4 offset-md-1">
+        <label for="validationDefault06" class="form-label">Mobile Number</label>
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroupPrepend2">+91</span>
+          <input type="tel" pattern="[0-9]{10}" class="form-control" id="validationDefault06"  aria-describedby="inputGroupPrepend2" name="mobileno" required>
         </div>
-        <div  class="col-md-4 offset-md-1">
-          <label for="validationDefault02" class="form-label">Last name</label>
-          <input type="text" class="form-control" id="validationDefault02" name="lastname" required>
+          
+      </div>
+      <div class="col-md-12 offset-md-1">
+        <label class="col-label" for="col-md-12">Documents to be submitted</label>
+        <br>
+        <br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value=True id="flexCheckDefault" name="aadhar">
+          <label class="form-check-label" for="flexCheckDefault">
+            Aadhar Card
+          </label>
         </div>
-        <div class="col-md-4 offset-md-1">
-          <label for="validationDefault04" class="form-label">Job Position</label>
-          <select class="form-select" id="validationDefault04" name="job_pos" required>
-            <option selected disabled value="">------ Select an Option ------</option>
-            <option>Sales</option>
-            <option>IT</option>
-            <option>HR</option>
-          </select>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value=True id="flexCheckChecked01" name="pan">
+          <label class="form-check-label" for="flexCheckChecked01">
+            Pan Card
+          </label>
         </div>
-        <div class="col-md-4 offset-md-1">
-            <label for="validationDefault03" class="form-label">Employee ID</label>
-            <input type="number" min="111111" max="999999" class="form-control" id="validationDefault03" name="empid" required>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value=True id="flexCheckChecked03" name="passport">
+          <label class="form-check-label" for="flexCheckChecked03">
+            Passport
+          </label>          
         </div>
-        <div class="col-md-4 offset-md-1">
-            <label for="validationDefault04" class="form-label">Date of Joining</label>
-            <input type="date" class="form-control" id="validationDefault04" name="date" required>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value=True id="flexCheckChecked02" name="license">
+          <label class="form-check-label" for="flexCheckChecked02">
+            Driving License
+          </label>
         </div>
-        <div class="col-md-4 offset-md-1">
-          <label for="validationDefault05" class="form-label">Email Address</label>
-          <input type="email" class="form-control" id="validationDefault05" placeholder="name@example.com" name="email" required>
-        </div>
-        <div class="col-4 offset-md-1">
-          <label for="validationDefault06" class="form-label">Mobile Number</label>
-          <div class="input-group">
-            <span class="input-group-text" id="inputGroupPrepend2">+91</span>
-            <input type="tel" pattern="[0-9]{10}" class="form-control" id="validationDefault06"  aria-describedby="inputGroupPrepend2" name="mobileno" required>
-          </div>
-            
-        </div>
-        <div class="col-md-12 offset-md-1">
-            <label class="col-label" for="col-md-12">Documents to be submitted</label>
-            <br>
-            <br>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="aadhar">
-              <label class="form-check-label" for="flexCheckDefault">
-                Aadhar Card
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked01" name="pan">
-              <label class="form-check-label" for="flexCheckChecked01">
-                Pan Card
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked02" name="license">
-              <label class="form-check-label" for="flexCheckChecked02">
-                Driving License
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked03" name="passport">
-              <label class="form-check-label" for="flexCheckChecked03">
-                Passport
-              </label>
-            </div>
-          </div>
-          <div class="col-12 offset-md-1">
-            <button class="btn btn-outline-primary" type="submit">Submit form</button>
-          </div>
-        </form>
-    </div>
+      </div>
+      <div class="col-12 offset-md-1">
+        <button class="btn btn-outline-primary" type="submit">Submit form</button>
+      </div>
+    </form>
   </div>
-  {% endblock %}
+</div>
+{% endblock %}
 
 
 <!-- Optional JavaScript; choose one of the two! -->
