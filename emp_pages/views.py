@@ -1,19 +1,46 @@
 from django.shortcuts import render
+from emp_pages.models import Up_Docs
 from hr_pages.models import Docs
 from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
+from django.http import HttpResponse
 
 # Create your views here.
 
 @login_required
 def up_docs(request):
 
-    fields = dict()
+    if request.method == "POST":
 
-    for field in Docs._meta.get_fields():
-        user = Docs.objects.all().filter(user_id=request.user.id)
-        attr = getattr(user[0], field.name)
-        fields[field.name.replace('_', ' ').capitalize()] = attr
+        aadhar = request.FILES.get('Aadhar Card', None)
+        pan = request.FILES.get('Pan Card', None)
+        passport = request.FILES.get('Passport', None)
+        d_license = request.FILES.get('Driving License', None)
+
+        print(aadhar, pan, passport, d_license)
+
+        up_doc = Up_Docs.objects.update_or_create(
+
+            user = request.user,
+            defaults={
+                'aadhar_f' : aadhar,
+                'pan_f' : pan,
+                'passport_f' : passport,
+                'd_license_f' : d_license,
+            }
+        )
+
+        return HttpResponse("<h3>Docs Submitted</h3>")
+ 
+
+    else:
+        fields = dict()
+
+        user = Docs.objects.get(pk=request.user.id)
+        temp = model_to_dict(user, exclude='user')
+
+        for key, value in temp.items():
+            fields[key.replace('_', ' ').title()] = value
+
+        return render(request, 'DocSubmit.html', {'fields':fields})
     
-    fields.pop('User')
-
-    return render(request, 'DocSubmit.html', {'fields':fields})

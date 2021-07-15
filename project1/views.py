@@ -33,7 +33,7 @@ def thanks(request):
     return HttpResponse("Thanks for Submitting")
 
 def notifications(request):
-    return render(request, "notification.html")
+    return render(request, "notifications.html")
 
 def schedule(request):
     return render(request, "CurrentSchedule.html", {'color':"bg-red"})

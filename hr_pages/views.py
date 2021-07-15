@@ -1,7 +1,9 @@
+from hr_orient.settings import MEDIA_URL
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from hr_pages.models import UserData, Docs
+from emp_pages.models import Up_Docs
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import user_passes_test
 from django.conf import settings
@@ -69,8 +71,6 @@ def register(request):
                 passport = request.POST.get('passport', False),
                 driving_license = request.POST.get('license', False),
                 )
-
-            docs.save()
             
             #Send password to user
             send_mail(
@@ -88,14 +88,22 @@ def register(request):
 
 #Employee Details View
 def view_emp(request):
-    entry = UserData.objects.all().filter(is_superuser=0)
-    return render(request, "EmployeeDetails.html", {'entry':entry})
+    if request.method == 'POST':
+
+        id = request.POST['id']
+        user = UserData.objects.get(pk=id)
+        user.delete()
+        return HttpResponse()
+
+    else:
+        entry = UserData.objects.filter(is_superuser=0)
+        return render(request, "EmployeeDetails.html", {'entry':entry})
 
 #Document Preview View
 def doc_preview(request):
-    return render(request, "DocPreview.html")
-
-def delete_emp(request):
-    id = request.GET['delete_button']
-    print(id)
-    return redirect("hr/emp_info")
+    if request.method == 'POST':
+        
+        id = request.POST['id']
+        emp = UserData.objects.get(pk=id)
+        docs = Up_Docs.objects.get(pk=id)
+        return render(request, 'DocPreview.html', {'emp':emp, 'docs':docs, 'media_url':MEDIA_URL})

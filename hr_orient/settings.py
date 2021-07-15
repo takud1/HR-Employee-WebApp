@@ -136,7 +136,10 @@ AUTH_USER_MODEL = 'hr_pages.UserData'
 LOGIN_URL = '/login/'
 
 MEDIA_ROOT = BASE_DIR.joinpath('media')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
+
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
+X_FRAME_OPTIONS = 'SAMEORIGIN' 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
