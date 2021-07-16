@@ -1,7 +1,36 @@
+* {
+    margin-left: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
 .btn-outline-success{
     margin-left: 20em;
 }
 
 .btn-outline-danger{
     margin-left: 2.5em;
+}
+
+.row embed{
+    width: 100em;
+    margin-left: 5em;
+}
+
+.table{
+    margin-left: 5.5em;
+}
+
+.row h4{
+    margin-left: 3.2em;
+}
+span#employee_name{
+     margin-left: 0.5em;
+ }
+img#emp_img{
+    margin-left: 5em;
+}
+
+h1{
+    text-align: center;
 }

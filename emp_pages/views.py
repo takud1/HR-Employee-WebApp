@@ -17,16 +17,14 @@ def up_docs(request):
         passport = request.FILES.get('Passport', None)
         d_license = request.FILES.get('Driving License', None)
 
-        print(aadhar, pan, passport, d_license)
-
-        up_doc = Up_Docs.objects.update_or_create(
+        Up_Docs.objects.update_or_create(
 
             user = request.user,
             defaults={
-                'aadhar_f' : aadhar,
-                'pan_f' : pan,
-                'passport_f' : passport,
-                'd_license_f' : d_license,
+                'aadhar_card' : aadhar,
+                'pan_card' : pan,
+                'passport' : passport,
+                'driving_license' : d_license,
             }
         )
 

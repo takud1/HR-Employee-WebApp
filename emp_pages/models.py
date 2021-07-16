@@ -9,7 +9,7 @@ def user_directory_path(instance, filename):
 
 class Up_Docs(models.Model):
     user = OneToOneField(UserData, primary_key=True, on_delete=models.CASCADE)
-    aadhar_f = models.FileField(upload_to=user_directory_path, blank=True, null=True)
-    pan_f = models.FileField(upload_to=user_directory_path, blank=True, null=True)
-    passport_f = models.FileField(upload_to=user_directory_path, blank=True, null=True)
-    d_license_f = models.FileField(upload_to=user_directory_path, blank=True, null=True)
+    aadhar_card = models.FileField(upload_to=user_directory_path, default=None, blank=True, null=True)
+    pan_card = models.FileField(upload_to=user_directory_path, default=None, blank=True, null=True)
+    passport = models.FileField(upload_to=user_directory_path, default=None, blank=True, null=True)
+    driving_license = models.FileField(upload_to=user_directory_path, default=None, blank=True, null=True)

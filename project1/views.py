@@ -15,7 +15,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return HttpResponse("Hi {}".format(request.user.get_short_name()))
+            return redirect("notifications")
         
         else:
             messages.error(request, 'Incorrect Username or Password')
