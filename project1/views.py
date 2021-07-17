@@ -1,3 +1,4 @@
+from project1.models import Notifications
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -33,11 +34,19 @@ def thanks(request):
     return HttpResponse("Thanks for Submitting")
 
 def notifications(request):
-    return render(request, "notifications.html")
+    
+    notifs = Notifications.objects.filter(user_id=request.user.id).order_by('-date').order_by('-time')
+
+    return render(request, "notifications.html", {'notifs':notifs})
+
+def del_notif(request):
+
+    id = request.GET['id']
+    Notifications.objects.get(pk=id).delete()
+    return redirect('/notifications')
 
 def schedule(request):
     return render(request, "CurrentSchedule.html", {'color':"bg-red"})
-
 
 @login_required
 def change_pwd(request):

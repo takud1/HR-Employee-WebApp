@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import CharField
 from hr_pages.models import UserData
 from django.db.models.fields.related import OneToOneField
 
@@ -13,3 +14,7 @@ class Up_Docs(models.Model):
     pan_card = models.FileField(upload_to=user_directory_path, default=None, blank=True, null=True)
     passport = models.FileField(upload_to=user_directory_path, default=None, blank=True, null=True)
     driving_license = models.FileField(upload_to=user_directory_path, default=None, blank=True, null=True)
+    aadhar_status = CharField(max_length=15, default="Processing")
+    pan_status = CharField(max_length=15, default="Processing")
+    passport_status = CharField(max_length=15, default="Processing")
+    driving_status = CharField(max_length=15, default="Processing")

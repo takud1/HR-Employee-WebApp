@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from emp_pages.models import Up_Docs
-from hr_pages.models import Docs
+from hr_pages.models import Docs, UserData
+from project1.models import Notifications
 from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
@@ -28,14 +29,24 @@ def up_docs(request):
             }
         )
 
+        users = UserData.objects.filter(is_staff=True)
+
+        for user in users:
+            Notifications.objects.create(
+
+                    user = user,
+                    title = "Document Submission",
+                    notification = "Employee {} (ID:{}) has submitted his/her documents for review".format(request.user.get_full_name(), request.user.emp_id),
+                )
+
         return HttpResponse("<h3>Docs Submitted</h3>")
  
 
     else:
         fields = dict()
 
-        user = Docs.objects.get(pk=request.user.id)
-        temp = model_to_dict(user, exclude='user')
+        docs = Docs.objects.get(pk=request.user.id)
+        temp = model_to_dict(docs, fields=['aadhar_card', 'pan_card', 'passport', 'driving_license'])
 
         for key, value in temp.items():
             fields[key.replace('_', ' ').title()] = value

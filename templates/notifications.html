@@ -25,27 +25,21 @@
     <br>
     <br>
     <div class="container">
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Hello!</strong> You have successfully logged in.
-            <p><small>11 mins ago</small></p>
+        {% for notif in notifs %}
+        {% csrf_token %}
+        <div>
+            {% ifchanged %}<p class="h4">{{notif.date}}</p> {% endifchanged %}
+        </div>
+        <div class="alert alert-primary alert-dismissible fade show" onclick="location.href='/del_notif/?id={{notif.id}}'" role="alert">
+            <strong>{{notif.title}}</strong>
+            <br>
+                    {{notif.notification}}
+            <p><small>{{notif.time}}</small></p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Hello!</strong> You have successfully logged in.
-
-            <p><small>11 mins ago</small></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Hello!</strong>
-            <small>11 mins ago</small>
-
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae dolores itaque sed veritatis reprehenderit accusamus mollitia consectetur voluptates doloribus tenetur magni ea cupiditate obcaecati voluptatem natus numquam, temporibus
-                saepe qua</p>
-            <p><small>11 mins ago</small></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
+        {% empty %}
+        <h4>No New Notifications</h4>
+        {% endfor %}
     </div>
 </div>
 

@@ -22,7 +22,7 @@
   <h1>Document Preview</h1>
   <br>
   <div class="row">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/Jesse_Pinkman_S5B.png/220px-Jesse_Pinkman_S5B.png" class="rounded-circle" alt="75x75" id="emp_img"> 
     <span class="fs-4" name="employee_name" id="employee_name">{{emp.get_short_name}}</span>
   </div>
@@ -48,8 +48,8 @@
       <embed type="application/pdf" src= "{{media_url}}/{{value}}" width= "100%" height= "305">
     </div>
   </div>
-  <button type="button" class="btn btn-outline-success">Accept</button>   
-  <button type="button" class="btn btn-outline-danger">Reject</button>
+  <button type="button" class="btn btn-outline-success" onclick="location.href='/hr/doc_review/?id={{emp.id}}&key={{key}}&check=True'">Accept</button>   
+  <button type="button" class="btn btn-outline-danger" onclick="location.href='/hr/doc_review/?id={{emp.id}}&key={{key}}&check=False'">Reject</button>
       {% endif %}
     {% endfor %}
 </div>

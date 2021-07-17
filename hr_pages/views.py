@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from hr_pages.models import UserData, Docs
 from emp_pages.models import Up_Docs
+from project1.models import Notifications
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import user_passes_test
 from django.conf import settings
@@ -79,19 +80,28 @@ def register(request):
                 recipient_list=[email],
                 )
             """
+            
+            Notifications.objects.create(
+
+                user=user,
+                title = "Welcome To Phemesoft",
+                notification = "Please change your password at the earliest.",
+            )
+
             return HttpResponse("<h3>User {} has been created<h3>".format(first_name))
-        
 
     else:
         return render(request, 'AddEmployee.html')
 
 #Employee Details View
+@user_passes_test(staff_check)
 def view_emp(request):
 
     entry = UserData.objects.filter(is_superuser=0)
     return render(request, "EmployeeDetails.html", {'entry':entry})
 
 #Document Preview View
+@user_passes_test(staff_check)
 def doc_preview(request):
 
     id = request.GET['id']
@@ -100,17 +110,64 @@ def doc_preview(request):
 
     fields = dict()
 
-    temp = model_to_dict(docs, exclude='user')
+    temp = model_to_dict(docs, fields=['aadhar_card', 'pan_card', 'passport', 'driving_license'])
 
     for key, value in temp.items():
         fields[key.replace('_', ' ').title()] = value
+
+    print(fields)
     
     return render(request, 'DocPreview.html', {'emp':emp, 'fields':fields, 'media_url':MEDIA_URL})
 
+@user_passes_test(staff_check)
+def doc_review(request):
+    
+    id = request.GET['id']
+    user = UserData.objects.get(pk=id)
+    key = request.GET['key']
+    check = request.GET['check']
+    new_key = key.split()[0].lower() + "_status"
+
+    if check == 'True':
+        Up_Docs.objects.update_or_create(
+
+            user = user,
+            defaults={
+                new_key : 'Accepted'
+            }
+        )
+
+        Notifications.objects.create(
+
+                user = user,
+                title = "Document Submission",
+                notification = "Your submitted document {} has been accepted.".format(key),
+            )
+        return redirect('/hr/doc_preview/?id={}'.format(id))
+    
+    else:
+        Up_Docs.objects.update_or_create(
+
+            user = UserData.objects.get(pk=id),
+            defaults={
+                new_key : 'Rejected'
+            }
+        )
+
+        Notifications.objects.create(
+
+                user = user,
+                title = "Document Submission",
+                notification = "Your submitted document {} has been rejected. Kindly reupload the required document at the earliest.".format(key),
+            )
+
+        return redirect('/hr/doc_preview/?id={}'.format(id))
+
+
+@user_passes_test(staff_check)
 def del_emp(request):
 
     id = request.GET['id']
     user = UserData.objects.get(pk=id)
     user.delete()
     return redirect('view_emp')
-    
