@@ -83,8 +83,8 @@ def register(request):
             
             Notifications.objects.create(
 
-                user=user,
-                title = "Welcome To Phemesoft",
+                user = user,
+                title = "Welcome To Phemesoft!",
                 notification = "Please change your password at the earliest.",
             )
 
@@ -114,8 +114,6 @@ def doc_preview(request):
 
     for key, value in temp.items():
         fields[key.replace('_', ' ').title()] = value
-
-    print(fields)
     
     return render(request, 'DocPreview.html', {'emp':emp, 'fields':fields, 'media_url':MEDIA_URL})
 
@@ -141,8 +139,8 @@ def doc_review(request):
 
                 user = user,
                 title = "Document Submission",
-                notification = "Your submitted document {} has been accepted.".format(key),
-            )
+                notification = "Your submitted document '{}' has been accepted.".format(key),
+        )
         return redirect('/hr/doc_preview/?id={}'.format(id))
     
     else:
@@ -158,8 +156,8 @@ def doc_review(request):
 
                 user = user,
                 title = "Document Submission",
-                notification = "Your submitted document {} has been rejected. Kindly reupload the required document at the earliest.".format(key),
-            )
+                notification = "Your submitted document '{}' has been rejected. Kindly reupload the required document at the earliest.".format(key),
+        )
 
         return redirect('/hr/doc_preview/?id={}'.format(id))
 
