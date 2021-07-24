@@ -1,0 +1,144 @@
+{% extends 'sidebar.html' %}
+
+{% block content %}
+
+{% load static %}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="{% static 'notificationsStyle.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<div class="col-md-9">
+    <br>
+    <h1>Schedule</h1>
+    <br>
+    <br>
+    <div class="container">
+        {% for sched in scheds %}
+        <div>
+            {% ifchanged %}<p class="h4">{{sched.date}}</p> {% endifchanged %}
+        </div>
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <h5 name="meeting_title">{{sched.title}}</h5>
+            <p name="meeting_description">{{sched.description}}</p>
+            <p><span name="timing">Begins at {{sched.time}}</span></p>
+        </div>
+        {% empty %}
+        <h4>No Meetings Scheduled</h4>
+        {% endfor %}
+    </div>
+    <br>
+    <br>
+    {% if user.is_staff %}
+    <h1>New Meeting</h1>
+    <br>
+    <div class="container">
+
+        <form class="row g-3 needs-validation" method="POST">
+            {% csrf_token %}
+            <div class="col-md-4" id="Title">
+                <label for="validation01" class="form-label">Meeting Title</label>
+                <input type="text" class="form-control" id="validation01" name="meeting_title" required>
+                <div class="invalid-feedback">
+                    Please enter a valid Meeting Title
+                </div>
+            </div>
+            <div class="col-md-4 offset-md-2" id="Date">
+                <label for="validation02" class="form-label">Date</label>
+                <input type="date" class="form-control" id="validation02" name="dated" required>
+                <div class="invalid-feedback">
+                    Please enter a valid Date for Meeting
+                </div>
+            </div>
+            <div class="col-md-4" id="Time">
+                <label for="validation03" class="form-label">Start Time</label>
+                <input type="time" min="09:00" max="18:00" class="form-control" id="validation03" name="timing" required>
+                <div class="invalid-feedback">
+                    Please enter a valid Start Time for Meeting
+                </div>
+            </div>
+            <div class="col-md-4 offset-md-2">
+                <label for="validation04" class="form-label">Add Group</label>
+                <select class="form-select" id="validation04" name="emp_group" required>
+                    <option selected disabled value="">------ Select an Option ------</option>
+                    <option>Sales</option>
+                    <option>IT</option>
+                    <option>HR</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a valid Group
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Desciption of Meeting
+                    (optional)</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                    name="meeting_description"></textarea>
+            </div>
+            <div class="col-12">
+                <div class="d-flex flex-row-reverse pe-1">
+                    <button type="submit" class="btn btn-outline-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-calendar-plus-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM8.5 8.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5a.5.5 0 0 1 1 0z">
+                            </path>
+                        </svg>
+                        Schedule Meet
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+{% endblock %}

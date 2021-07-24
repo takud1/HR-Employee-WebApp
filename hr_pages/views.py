@@ -80,7 +80,6 @@ def register(request):
                 recipient_list=[email],
                 )
             """
-            
             Notifications.objects.create(
 
                 user = user,

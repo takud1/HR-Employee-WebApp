@@ -1,11 +1,11 @@
-from project1.models import Notifications
+from project1.models import Notifications, Schedule
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 from hr_pages.models import UserData
-from django.contrib.sessions.models import Session
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -62,7 +62,40 @@ def del_notif(request):
 
 @login_required
 def schedule(request):
-    return render(request, "CurrentSchedule.html", {'color':"bg-red"})
+    if request.method == 'POST':
+        title = request.POST['meeting_title'],
+        dated = request.POST['dated'],
+        time = request.POST['timing'],
+        group = request.POST['emp_group'],
+        description = request.POST.get('meeting_description', None)
+
+        Schedule.objects.create(
+            title = title[0],
+            date = datetime.strptime(dated[0], '%Y-%m-%d').date(),
+            time = datetime.strptime(time[0], '%H:%M').time(),
+            group = group[0],
+            description = description,
+            )
+        
+        for emp in UserData.objects.filter(group_name=group[0]).filter(is_staff=False):
+
+            Notifications.objects.create(
+
+            user = emp,
+            title = "Meeting Alert",
+            notification = "A meet has been scheduled by {}.\n Please check the schedule section".format(request.user.first_name),
+            )
+
+        messages.success(request, 'Meeting has been scheduled')
+        return render(request, "NewSchedule.html")
+
+    else:
+        if request.user.is_staff:
+            scheds = Schedule.objects.filter(date__lt=datetime.now() + timedelta(days=5), date__gt=datetime.now()).order_by('date', 'time')
+
+        else:
+            scheds = Schedule.objects.filter(group=request.user.group_name, date__lt=datetime.now() + timedelta(days=5), date__gt=datetime.now()).order_by('date', 'time')
+        return render(request, "NewSchedule.html", {'scheds':scheds})
 
 @login_required
 def change_pwd(request):
