@@ -86,8 +86,8 @@ def schedule(request):
             notification = "A meet has been scheduled by {}.\n Please check the schedule section".format(request.user.first_name),
             )
 
-        messages.success(request, 'Meeting has been scheduled')
-        return render(request, "NewSchedule.html")
+        messages.success(request, 'The Meeting Has Been Scheduled')
+        return redirect("/schedule/")
 
     else:
         if request.user.is_staff:

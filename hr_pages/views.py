@@ -87,7 +87,8 @@ def register(request):
                 notification = "Please change your password at the earliest.",
             )
 
-            return HttpResponse("<h3>User {} has been created<h3>".format(first_name))
+            messages.success(request, "The Profile For Employee {} Has Been Created Successfully".format(first_name))
+            return redirect('/hr/register/')
 
     else:
         return render(request, 'AddEmployee.html')

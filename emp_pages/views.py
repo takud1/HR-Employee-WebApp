@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect, render
 from emp_pages.models import Up_Docs
 from hr_pages.models import Docs, UserData
 from project1.models import Notifications
@@ -39,8 +40,8 @@ def up_docs(request):
                     notification = "Employee {} (ID:{}) has submitted his/her documents for review".format(request.user.get_full_name(), request.user.emp_id),
                 )
 
-        return HttpResponse("<h3>Docs Submitted</h3>")
- 
+        messages.success(request, 'The Documents Have Been Uploaded')
+        return redirect('/emp/up_docs/')
 
     else:
         fields = dict()
