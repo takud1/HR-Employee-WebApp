@@ -118,3 +118,21 @@ def change_pwd(request):
 
     else:
         return render(request, 'changepwd.html')
+
+@login_required
+def change_prof_pic(request):
+
+    if request.method == "POST":
+
+        prof_pic = request.FILES['prof_pic']
+
+        UserData.objects.update_or_create(
+            id=request.user.id,
+            defaults={'prof_pic':prof_pic}
+        )
+
+        messages.success(request, 'Profile Picture Updated Successfully')
+        return redirect('/change_prof_pic/')
+    else:
+
+        return render(request, 'UploadImg.html')
