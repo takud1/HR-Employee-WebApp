@@ -64,13 +64,13 @@
                         <div class="input-group mt-0 mb-4">
                             <input type="file" accept=".pdf" class="form-control" id="inputGroupFile04" name="{{key}}" aria-label="Upload" required>
                         </div>
-                    {% else %}
-                    <h4>All Documents Submitted</h4>
                     {% endif %}
+                {% empty %}
+                    <h4>All Documents Submitted</h4>
                 {% endfor %}
             </div>
             <div class="col-12">
-                <button class="btn btn-outline-primary" type="submit">Submit Documents</button>
+                <button class="btn btn-outline-primary" type="submit">Upload</button>
             </div>
         </form>
     </div>

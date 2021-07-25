@@ -6,6 +6,8 @@ from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 from hr_pages.models import UserData
 from datetime import datetime, timedelta
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 
@@ -100,24 +102,19 @@ def schedule(request):
 @login_required
 def change_pwd(request):
     if request.method == "POST":
-        username = request.user.username
-        c_password = request.POST['c_password']
-        n_password1 = request.POST['n_password1']
-        n_password2 = request.POST['n_password2']
-        user = auth.authenticate(username=username, password=c_password)
-
-        if user is not None:
-            if n_password1 == n_password2:
-                u = UserData.objects.get(username__exact=username)
-                u.set_password(n_password1)
-                messages.success(request, "Password Changed Successfully")
-                return render(request, 'changepwd.html')
-
-        messages.error(request, "Incorrect Current Password")
-        return render(request, 'changepwd.html')
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('/change_pwd')
+        else:
+            messages.error(request, 'Please correct the error below.')
+            return redirect('/change_pwd')
 
     else:
-        return render(request, 'changepwd.html')
+        form = PasswordChangeForm(request.user)
+        return render(request, 'changepwd.html', {'form':form})
 
 @login_required
 def change_prof_pic(request):
