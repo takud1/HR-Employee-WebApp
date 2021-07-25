@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+* {
+    margin-left: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+h1{
+    margin-left: 0.5em;
+}
+
+.input-group{
+    margin-top: 4.85em;
+}
+
+form .btn-outline-primary{
+    margin-top: 1em;
+}
+
+.container .row{
+    margin-top: 2.25em;
+}
