@@ -14,9 +14,6 @@
     <title>Notifications</title>
     <link rel="stylesheet" href="{% static 'notificationsStyle.css' %}">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 </head>
 
 <div class="col-md-9">
@@ -55,7 +52,7 @@
     <br>
     <div class="container">
 
-        <form class="row g-3 needs-validation" method="POST">
+        <form class="row g-3 needs-validation" method="POST" novalidate>
             {% csrf_token %}
             <div class="col-md-4" id="Title">
                 <label for="validation01" class="form-label">Meeting Title</label>

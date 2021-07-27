@@ -50,7 +50,8 @@ def up_docs(request):
         temp = model_to_dict(docs, fields=['aadhar_card', 'pan_card', 'passport', 'driving_license'])
 
         for key, value in temp.items():
-            fields[key.replace('_', ' ').title()] = value
+            if value:
+                fields[key.replace('_', ' ').title()] = value
 
         return render(request, 'DocSubmit.html', {'fields':fields})
     

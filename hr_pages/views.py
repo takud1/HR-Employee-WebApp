@@ -1,6 +1,5 @@
 from hr_orient.settings import MEDIA_URL
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib import messages
 from hr_pages.models import UserData, Docs
 from emp_pages.models import Up_Docs
@@ -113,7 +112,8 @@ def doc_preview(request):
     temp = model_to_dict(docs, fields=['aadhar_card', 'pan_card', 'passport', 'driving_license'])
 
     for key, value in temp.items():
-        fields[key.replace('_', ' ').title()] = value
+        if value:
+            fields[key.replace('_', ' ').title()] = value
     
     return render(request, 'DocPreview.html', {'emp':emp, 'fields':fields, 'media_url':MEDIA_URL})
 

@@ -59,12 +59,10 @@
             <div class="col-md-9">
                 {% csrf_token %}
                 {% for key, value in fields.items %}
-                    {% if value %}
                         <label for="validationDefault01" class="form-label">{{key}}</label>
                         <div class="input-group mt-0 mb-4">
                             <input type="file" accept=".pdf" class="form-control" id="inputGroupFile04" name="{{key}}" aria-label="Upload" required>
                         </div>
-                    {% endif %}
                 {% empty %}
                     <h4>All Documents Submitted</h4>
                 {% endfor %}
