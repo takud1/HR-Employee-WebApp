@@ -44,7 +44,7 @@
               <span class="fs-4">{{ user.get_short_name }}</span>
             </a>
             <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
+            <ul class="nav nav-pills flex-column mb-auto" id="nav">
               {% if user.is_staff %}
               <li class="nav-item">
                 <a href="/hr/emp_info/" class="nav-link link-dark" id="emp" aria-current="page">
@@ -134,13 +134,14 @@
 
 <script>
 
-if (window.location.pathname == "/hr/emp_info/" || window.location.pathname == "/hr/doc_preview/" || window.location.pathname == "/hr/register/"){
-  document.getElementById("emp").classList.add("active");
-}else if(window.location.pathname == "/schedule/"){
-  document.getElementById("schedule").classList.add("active")
-}else if(window.location.pathname == "/notifications/"){
-  document.getElementById("notif").classList.add("active")
-}else if(window.location.pathname == "/emp/up_docs/"){
-  document.getElementById("up_doc").classList.add("active")
-}
+var list_items = document.getElementById('nav').children;
+
+for(i = 0; i < list_items.length; i++){
+
+  if (list_items[i].children[0].pathname.slice(0, 4) == window.location.pathname.slice(0, 4)){
+    list_items[i].children[0].classList.add('active');
+
+  }
+};
+
 </script>
